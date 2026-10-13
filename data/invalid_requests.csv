@@ -1,0 +1,6 @@
+id,customer,distanceKm
+R1,Alice,2
+R2,Bob,-5
+R3,Carol,abc
+R4,,10
+R5,Erin
