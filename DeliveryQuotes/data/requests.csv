@@ -1,0 +1,11 @@
+id,customer,distanceKm,weightGrams,zone
+R1,Alice,2,1500,A
+R2,Bob,10,3000,A
+R3,Carol,50,12300,B
+R4,Dave,75,2000,B
+R5,Erin,1,500,A
+R6,Frank,0,300,A
+R7,Grace,8,6000,B
+R8,Heidi,20,6000,B
+R9,Ivan,5,3000,C
+R10,Judy,12,4000,C

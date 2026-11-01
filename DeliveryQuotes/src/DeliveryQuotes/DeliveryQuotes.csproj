@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RollForward>LatestMajor</RollForward>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <!-- Native C library (native/dq_surcharge.c) -->
+  <PropertyGroup>
+    <NativeDir>$(MSBuildThisFileDirectory)..\..\native\</NativeDir>
+    <NativeOut>$(NativeDir)out\</NativeOut>
+    <NativeFile Condition="$([MSBuild]::IsOSPlatform('Windows'))">deliveryquotes_native.dll</NativeFile>
+    <NativeFile Condition="$([MSBuild]::IsOSPlatform('OSX'))">libdeliveryquotes_native.dylib</NativeFile>
+    <NativeFile Condition="$([MSBuild]::IsOSPlatform('Linux'))">libdeliveryquotes_native.so</NativeFile>
+    <NativeFlags Condition="$([MSBuild]::IsOSPlatform('Windows'))">-shared</NativeFlags>
+    <NativeFlags Condition="$([MSBuild]::IsOSPlatform('OSX'))">-dynamiclib</NativeFlags>
+    <NativeFlags Condition="$([MSBuild]::IsOSPlatform('Linux'))">-shared -fPIC</NativeFlags>
+  </PropertyGroup>
+
+  <!-- Builds the library with gcc if gcc is available. If it is not, the build only warns and the
+       already built binary in native/out (if any) is used. Pass -p:SkipNativeBuild=true to skip. -->
+  <Target Name="BuildNative" BeforeTargets="BeforeBuild" Condition="'$(SkipNativeBuild)' != 'true' And '$(NativeFile)' != ''">
+    <MakeDir Directories="$(NativeOut)" />
+    <Exec Command="gcc $(NativeFlags) -O2 -o &quot;$(NativeOut)$(NativeFile)&quot; &quot;$(NativeDir)dq_surcharge.c&quot;"
+          ContinueOnError="true"
+          StandardOutputImportance="low" />
+  </Target>
+
+  <!-- Copy the binary next to the app when it already exists at evaluation time. -->
+  <ItemGroup>
+    <None Include="$(NativeOut)$(NativeFile)"
+          Condition="'$(NativeFile)' != '' And Exists('$(NativeOut)$(NativeFile)')"
+          CopyToOutputDirectory="PreserveNewest"
+          Link="%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>
