@@ -107,7 +107,7 @@ Latest test outcome: run `dotnet test` and write the result here (for example `P
 
 | Name | Group | Implemented logic | Tests | Documentation |
 |---|---|---|---|---|
-| Tumurzaev (full name: fill in) | IT2505 | individual project: models, parsing and validation, the three pipeline stages, two price policies, console output | all tests in `QuotePipelineTests.cs` | this README |
+| Tumurzaev Rustam| IT2505 | individual project: models, parsing and validation, the three pipeline stages, two price policies, console output | all tests in `QuotePipelineTests.cs` | this README |
 
 ## Defense cheat sheet
 
