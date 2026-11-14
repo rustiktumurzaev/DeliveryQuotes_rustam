@@ -15,7 +15,7 @@ This is the integrated version of the delivery project. The idea from the beginn
 
 | Name | Group | Implemented logic | Tests | Documentation |
 |---|---|---|---|---|
-| _Full name (fill in)_ | IT2505 | everything below (individual project) | all test files | this README |
+| Tumurzaev Rustam | IT2505 | everything below (individual project) | all test files | this README |
 
 ## Environment and commands
 
